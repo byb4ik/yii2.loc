@@ -33,7 +33,6 @@ class Messages extends \yii\db\ActiveRecord
             [['message'], 'string'],
         ];
     }
-
     /**
      * {@inheritdoc}
      */

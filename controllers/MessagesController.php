@@ -18,5 +18,4 @@ class MessagesController extends \yii\web\Controller
 
         return $this->render('index', ['model' => $messages->find()->all()]);
     }
-
 }
