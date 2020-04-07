@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\models\Messages;
 /**
  * This is the model class for table "users".
  *
@@ -58,8 +58,13 @@ class Users extends \yii\db\ActiveRecord
         return Users::find()->where(['id' => $id])->one();
     }
 
-    public static function getUsers(array $ids = [])
+//    public static function getUsers(array $ids = [])
+//    {
+//        return Users::findAll($ids);
+//    }
+
+    public function getMessages()
     {
-        return Users::findAll($ids);
+        return $this->hasMany(Messages::class, ['user_id' => 'id']);
     }
 }

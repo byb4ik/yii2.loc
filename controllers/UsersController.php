@@ -11,7 +11,6 @@ class UsersController extends \yii\web\Controller
     public function actionIndex()
     {
         $users = new Users();
-
         return $this->render('index', ['model' => $users->find()->all()]);
     }
 
