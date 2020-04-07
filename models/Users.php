@@ -53,8 +53,13 @@ class Users extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getUsersById($id)
+    public static function getUserById($id)
     {
         return Users::find()->where(['id' => $id])->one();
+    }
+
+    public static function getUsers(array $ids = [])
+    {
+        return Users::findAll($ids);
     }
 }

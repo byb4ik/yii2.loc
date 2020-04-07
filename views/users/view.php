@@ -5,7 +5,7 @@ use yii\widgets\ActiveField;
 use yii\helpers\Html;
 
 ?>
-<h1>Пользователь <?php echo $model['username']; ?></h1>
+<h1>Редактировать данные <?php echo $model['username']; ?></h1>
 
 <ul>
     <li><label>Логин: </label><?php echo $model['username']; ?></li>

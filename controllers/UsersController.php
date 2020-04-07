@@ -29,7 +29,7 @@ class UsersController extends \yii\web\Controller
 
     public function actionView($id = null)
     {
-        $user = Users::getUsersById($id);
+        $user = Users::getUserById($id);
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
             $user->save();
         }
