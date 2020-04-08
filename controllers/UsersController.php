@@ -18,9 +18,11 @@ class UsersController extends \yii\web\Controller
     {
         $user = new Users();
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-            $user->save();
-
-            return $this->redirect('/users');
+            if ($user->save()) {
+                $id = Yii::$app->db->getLastInsertID();
+                Yii::$app->session->setFlash('success', 'Пользователь добавлен!');
+                return $this->redirect('/users/view?id=' . $id);
+            }
         }
 
         return $this->render('create', ['model' => $user]);
@@ -30,17 +32,22 @@ class UsersController extends \yii\web\Controller
     {
         $user = Users::getUserById($id);
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-            $user->save();
+            if ($user->save()) {
+                Yii::$app->session->setFlash('success', 'Запись обновлена!');
+            }
         }
 
         return $this->render('view', ['model' => $user]);
     }
 
-    public function actionDelete($id)
+
+    public
+    function actionDelete($id)
     {
         $user = Users::findOne($id);
-        $user->delete();
-
-        return $this->redirect('/users');
+        if ($user->delete()){
+            Yii::$app->session->setFlash('error', 'Пользователь удален!');
+            return $this->redirect('/users');
+        }
     }
 }
