@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Users;
+use yii\base\Security;
 use yii\rest\IndexAction;
 
 class UsersController extends \yii\web\Controller
@@ -11,6 +12,7 @@ class UsersController extends \yii\web\Controller
     public function actionIndex()
     {
         $users = new Users();
+
         return $this->render('index', ['model' => $users->find()->all()]);
     }
 
@@ -18,9 +20,12 @@ class UsersController extends \yii\web\Controller
     {
         $user = new Users();
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+            $security = new Security();
+            $user->password = $security->generatePasswordHash($user->password);
             if ($user->save()) {
                 $id = Yii::$app->db->getLastInsertID();
                 Yii::$app->session->setFlash('success', 'Пользователь добавлен!');
+
                 return $this->redirect('/users/view?id=' . $id);
             }
         }
@@ -32,6 +37,8 @@ class UsersController extends \yii\web\Controller
     {
         $user = Users::getUserById($id);
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+            $security = new Security();
+            $user->password = $security->generatePasswordHash($user->password);
             if ($user->save()) {
                 Yii::$app->session->setFlash('success', 'Запись обновлена!');
             }
@@ -41,12 +48,12 @@ class UsersController extends \yii\web\Controller
     }
 
 
-    public
-    function actionDelete($id)
+    public function actionDelete($id)
     {
         $user = Users::findOne($id);
-        if ($user->delete()){
+        if ($user->delete()) {
             Yii::$app->session->setFlash('error', 'Пользователь удален!');
+
             return $this->redirect('/users');
         }
     }
