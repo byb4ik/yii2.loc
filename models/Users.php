@@ -106,7 +106,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        // TODO: Implement findIdentity() method.
+        return static::findOne($id);
     }
 
     /**
