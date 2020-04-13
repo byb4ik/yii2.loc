@@ -22,6 +22,7 @@ class UsersController extends \yii\web\Controller
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
             $security = new Security();
             $user->password = $security->generatePasswordHash($user->password);
+            $user->date_update = date("l dS of F Y h:I:s A");
             if ($user->save()) {
                 $id = Yii::$app->db->getLastInsertID();
                 Yii::$app->session->setFlash('success', 'Пользователь добавлен!');
@@ -39,6 +40,7 @@ class UsersController extends \yii\web\Controller
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
             $security = new Security();
             $user->password = $security->generatePasswordHash($user->password);
+            $user->date_update = date("l dS of F Y h:I:s A");
             if ($user->save()) {
                 Yii::$app->session->setFlash('success', 'Запись обновлена!');
             }

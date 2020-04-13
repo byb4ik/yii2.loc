@@ -23,5 +23,8 @@ use \yii\helpers\Html;
         <li>
             <label>Почта: </label><?php echo $user['mail']; ?>
         </li>
+        <li>
+            <label>Почта: </label><?php echo $user['date_update']; ?>
+        </li>
     </ul>
 <?php } ?>

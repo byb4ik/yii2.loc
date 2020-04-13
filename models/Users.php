@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property string $mail
  * @property int|null $access
+ * @property string $date_update
  */
 class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -31,13 +32,14 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'mail'], 'required'],
+            [['username', 'password', 'mail', 'date_update'], 'required'],
             [['access'], 'integer'],
             [['username'], 'string', 'max' => 20],
             [['password'], 'string', 'max' => 255],
             [['mail'], 'string', 'max' => 30],
             [['username'], 'unique'],
             [['mail'], 'unique'],
+            [['date_update'], 'string', 'max' => 100]
         ];
     }
 
@@ -52,6 +54,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Пароль',
             'mail' => 'Почта',
             'access' => 'Access',
+            'date_update' => 'Дата обновления'
         ];
     }
 

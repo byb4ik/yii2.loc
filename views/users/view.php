@@ -8,9 +8,10 @@ use yii\helpers\Html;
 <h1>Редактировать данные <?php echo $model['username']; ?></h1>
 
 <ul>
-    <li><label>Логин: </label><?php echo $model['username']; ?></li>
-    <li><label>Пароль: </label><?php echo $model['password']; ?></li>
-    <li><label>Почта: </label><?php echo $model['mail']; ?></li>
+    <li><label>Логин :</label><?php echo $model['username']; ?></li>
+    <li><label>Пароль :</label><?php echo $model['password']; ?></li>
+    <li><label>Почта :</label><?php echo $model['mail']; ?></li>
+    <li><label>Дата изменения :</label><?php echo $model['date_update']; ?></li>
 </ul>
 
 <?php
